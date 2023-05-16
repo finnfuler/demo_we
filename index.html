@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <center>
+        <form onsubmit="return validateForm()">
+            <label for="username">Username</label>
+            <input type="text" id="username" name="username"><br><br>
+
+            <label for="email">Email</label>
+            <input type="email" id="email" name="email"><br><br>
+
+            <label for="password">Password</label>
+            <input type="password" id="password" name="password"><br><br>
+
+            <label for="confirm_password">Confirm Password</label>
+            <input type="password" id="cpassword" name="cpassword"><br><br>
+
+            <label for="phone">Phone Number</label>
+            <input type="text" id="phone" name="phone"><br><br>
+
+            <label for="country">Country</label>
+            <select id="country" name="country">
+                <option value="">Please Select</option>
+                <option value="India">India</option>
+                <option value="Australia">Australia</option>
+                <option value="England">England</option>
+            </select><br><br>
+
+            <input type="submit" value="submit">
+        </form>
+    </center>
+    <script>
+        function validateForm()
+        {
+            const username=document.forms[0]["username"].value
+            const email=document.forms[0]["email"].value
+            const password=document.forms[0]["password"].value
+            const cpassword=document.forms[0]["cpassword"].value
+            const phone=parseInt(document.forms[0]["phone"].value)
+
+            const specialCharsRegex = /[!@#$%^&*()_+\-=[\]{};':"\\|,.<>/?]+/;
+            const firstLetterCapitalRegex = /^[A-Z]/;
+            // const lastLetterCapitalRegex = /[A-Z]$/;
+
+            if(username == ""|| email == ""|| password == ""|| cpassword == "") {
+                alert("all fields must be filled")
+                return false
+            }           
+
+            if(username.length<7 || username.length > 12)
+            {
+                alert("Username must be between 7 and 12 characters")
+                return false        
+            }
+
+            if(password.length<5 || password.length>10){
+                alert("Password must be between 5 and 10 characters")
+                return false
+            }
+
+            if(password != cpassword){
+                alert("Password and Confirm Password does not match")
+                return false
+            }
+
+            if(!specialCharsRegex.test(password)){
+                alert('Password must have special Character')
+                return false
+            }
+
+            if(!firstLetterCapitalRegex.test(password)){
+                alert('Password must have first letter capital')
+                return false
+            }
+
+            var email_regex=/\S+@\S+\.\S+/
+            if(!email_regex.test(email)){
+                alert("Email must be a valid email address")
+                return false
+            }
+
+            if(isNaN(phone)){
+                alert("Phone Number must be Numeric")
+                return false
+            }
+
+            if(!phone.length == 10)
+            {
+                alert("Invalid Phone Number")
+                return false
+            }
+        }
+    </script>
+</body>
+</html>
